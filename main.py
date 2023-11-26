@@ -1,9 +1,10 @@
-from PyQt5.QtWidgets import QApplication
+from PyQt6.QtWidgets import QApplication
 from random import choice,shuffle
 app = QApplication([])
 
 from main_window import *
-
+from menu_window import *
+menu_window.show()
 
 class Question:
     def __init__(self, q_text, ans, wrong1, wrong2, wrong3) -> None:
@@ -63,6 +64,27 @@ def switch_box():
         next_question()
 btn_next.clicked.connect(switch_box)
 
+def close_menu():
+    menu_window.hide()
+    window.show()
+    
+btn_back.clcked.connect(close_menu)
+
+def open_menu():
+    menu_window.close()
+    window.hide()
+
+main_v_line.addWidget(btn_menu)
+btn_menu.clicked.connect(open_menu)
+
+def clear_menu():
+    le_question.clear()
+    le_answer.clear()
+    le_wrong1.clear()
+    le_wrong2.clear()
+    le_wrong3.clear()
+
+btn_clear.clicked.connect(clear_menu)
 
 
 window.show()
